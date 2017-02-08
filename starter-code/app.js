@@ -32,8 +32,8 @@ app.get('/categories', (request, response) => {
 
 // not working
 app.get('/categories/:category', (request, response) => {
-  response.send(`Chuck Norris Jokes in the category: ${request.params.category}`)
-    client.getRandomJoke().then(function (res) {
+  // response.send(`Chuck Norris Jokes in the category: ${request.params.category}`)
+    client.getRandomJoke(request.params.category).then(function (res) {
       jokeValue = res.value;
       console.log(jokeValue);
           response.render("joke-by-category", {jokeCategory: jokeValue});
@@ -42,10 +42,19 @@ app.get('/categories/:category', (request, response) => {
     })
 });
 
-// Free text search
-// app.get('/search', (request, response) => {
 // client.search(searchTerm).then(function (response) {
-//     // to stuff here
+//   app.get('/search', (req, res) => {
+//     res.render('search');
+//   });
+// }).catch(function (err) {
+//     console.log(err);
+// });
+
+
+// Free text search
+// client.search(searchTerm).then(function (response) {
+// app.get('/search', (req, res) => {
+//     res.render('search')
 // }).catch(function (err) {
 //     console.log("not found");
 // });
