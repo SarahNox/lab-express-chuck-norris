@@ -13,10 +13,14 @@ app.listen(3000, () => {
   console.log('port 3000 in use')
 });
 
+app.get('/index', (req, res) => {
+  res.render('index');
+});
+
 app.get('/random', (request, response) => {
    client.getRandomJoke().then(function (res) {
       jokeValue = res.value;
-        response.render("index", {joke: jokeValue});
+        response.render("random", {joke: jokeValue});
     }).catch(function (err) {
         console.log("what are you doing here?");
     });
@@ -30,9 +34,7 @@ app.get('/categories', (request, response) => {
   });
 });
 
-// not working
 app.get('/categories/:category', (request, response) => {
-  // response.send(`Chuck Norris Jokes in the category: ${request.params.category}`)
     client.getRandomJoke(request.params.category).then(function (res) {
       jokeValue = res.value;
       console.log(jokeValue);
@@ -41,14 +43,6 @@ app.get('/categories/:category', (request, response) => {
           console.log("no, that's not working");
     })
 });
-
-// client.search(searchTerm).then(function (response) {
-//   app.get('/search', (req, res) => {
-//     res.render('search');
-//   });
-// }).catch(function (err) {
-//     console.log(err);
-// });
 
 
 // Free text search
